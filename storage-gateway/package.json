@@ -1,18 +1,19 @@
 {
-	"name": "database-facade",
-	"version": "1.0.0",
-	"description": "",
-	"private": true,
-	"main": "server.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"author": "Tim Gremplewski",
-    "license": "MIT",
-	"dependencies": {
-		"body-parser": "~1.17.1",
-		"cookie-parser": "~1.4.3",
-		"express": "~4.15.2",
-		"morgan": "~1.8.1"
-	}
+  "name": "storage-gateway",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tim Gremplewski",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "express": "~4.15.2",
+    "morgan": "~1.8.1",
+    "unirest": "^0.5.1"
+  }
 }
