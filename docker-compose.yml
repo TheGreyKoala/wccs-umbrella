@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  storage:
+    image: neo4j:latest
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - ~/neo4j_data:/data
+  storage-gateway:
+    build: ./storage-gateway
+    image: thesis/db_facade:latest
+    ports:
+      - "52629:52629"
+  test-page:
+    image: httpd:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./test_website:/usr/local/apache2/htdocs/

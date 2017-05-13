@@ -1,3 +1,5 @@
+"use strict";
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
@@ -26,7 +28,7 @@ app.use('/annotations', annotations);
  * Handle not found error
  */
 app.use((request, response, next) => {
-	var error = new Error('Resource not found');
+	let error = new Error('Resource not found');
 	error.status = 404;
 	next(error);
 });
@@ -36,6 +38,6 @@ app.use((error, request, response, next) => {
 			.json( { "error_message": error.message || "Unknown error" } );
 });
 
-app.listen(8080, function() {
+app.listen(52629, function() {
 	console.log("Server started...");
 });
