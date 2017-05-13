@@ -10,7 +10,7 @@ services:
       - ~/neo4j_data:/data
   storage-gateway:
     build: ./storage-gateway
-    image: thesis/db_facade:latest
+    image: thesis/storage-gateway:latest
     ports:
       - "52629:52629"
   test-page:
@@ -18,4 +18,4 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./test_website:/usr/local/apache2/htdocs/
+      - ./test-website:/usr/local/apache2/htdocs/

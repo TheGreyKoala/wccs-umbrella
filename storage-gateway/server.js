@@ -15,9 +15,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 app.use((request, response, next) => {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    response.header("Access-Control-Allow-Methods", "DELETE, GET, POST, PUT");
+    response.set({
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+        "Access-Control-Allow-Methods": "DELETE, GET, POST, PUT"
+    });
     next();
 });
 

@@ -13,6 +13,7 @@
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "express": "~4.15.2",
+    "jsesc": "^2.5.1",
     "morgan": "~1.8.1",
     "unirest": "^0.5.1"
   }
