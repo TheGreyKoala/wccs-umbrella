@@ -1,0 +1,16 @@
+{
+  "name": "site-analyser",
+  "version": "1.0.0",
+  "description": "Analyser prototype",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tim Gremplewski",
+  "license": "MIT",
+  "dependencies": {
+    "jsdom": "^10.1.0",
+    "simple-xpath-position": "^2.0.2",
+    "unirest": "^0.5.1"
+  }
+}
