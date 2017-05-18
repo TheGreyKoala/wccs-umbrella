@@ -59,6 +59,8 @@ router.route('/')
                                 if (neo4jResponse2.ok) {
                                     console.log("Annotation label successfully set.");
                                     console.log("Setting annotation id");
+
+                                    // TODO: Id cannot be written if content contains umlauts
                                     annotation.id = annotationId;
 
                                     putRequest(annotationId, annotation, (neo4jResponse3) => {
