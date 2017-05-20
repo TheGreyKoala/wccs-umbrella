@@ -29,8 +29,10 @@ router.route('/')
         // create
 
         try {
-            request.body.created = new Date().toISOString();
-            request.body.updated = request.body.created;
+            // TODO: No ranges in annotations?!
+            const annotation = request.body;
+            annotation.created = new Date().toISOString();
+            annotation.updated = request.body.created;
 
             unirest
                 .post("http://storage:7474/db/data/node")
@@ -39,11 +41,10 @@ router.route('/')
                     "Content-Type": "application/json",
                     "Authorization": "Basic bmVvNGo6bEVnT2xBcw=="
                 })
-                .send({"annotation": JSON.stringify(request.body)})
+                .send({"annotation": JSON.stringify(annotation)})
                 .end((neo4jResponse) => {
                     if (neo4jResponse.ok) {
                         const annotationId = neo4jResponse.body.metadata.id;
-                        const annotation = JSON.parse(neo4jResponse.body.data.annotation);
 
                         console.log("Annotation successfully created.");
                         console.log("Adding label: " + "http://storage:7474/db/data/node/" + annotationId + "/labels");
@@ -60,7 +61,6 @@ router.route('/')
                                     console.log("Annotation label successfully set.");
                                     console.log("Setting annotation id");
 
-                                    // TODO: Id cannot be written if content contains umlauts
                                     annotation.id = annotationId;
 
                                     putRequest(annotationId, annotation, (neo4jResponse3) => {
@@ -93,10 +93,8 @@ router.route('/')
 
 function putRequest(id, annotation, callback) {
     const annotationAsString = jsesc(JSON.stringify(annotation), {
-        "quotes": "double",
-        "wrap": "true"
+        "json": true
     });
-    console.log(annotationAsString);
     unirest
         .put("http://storage:7474/db/data/node/" + id + "/properties/annotation")
         .headers({
