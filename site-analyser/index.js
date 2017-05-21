@@ -5,7 +5,7 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const xpath = require("simple-xpath-position");
 
-function createAnnotation(document, cssSelector) {
+function createAnnotation(document, cssSelector, contentType) {
     const promises = [];
     document.querySelectorAll(cssSelector)
         .forEach((node) => {
@@ -16,7 +16,7 @@ function createAnnotation(document, cssSelector) {
 
             const annotation = {
                 "annotator_schema_version": "v1.0",
-                "text": "This was generated automatically",
+                "text": contentType,
                 "quote": nodeTextContent,
                 "uri": "http://localhost",
                 // TODO: Text is not completely selected!
@@ -33,6 +33,7 @@ function createAnnotation(document, cssSelector) {
             promises.push(new Promise((resolve, reject) => {
                 unirest.post("http://localhost:52629/annotations")
                     .followRedirect(false)
+                    .type("json")
                     .send(annotation)
                     .end((response) => {
                         if (response.status === 303) {
@@ -52,10 +53,11 @@ unirest.get("http://localhost")
            const dom = new JSDOM(response.body);
            const document = dom.window.document;
 
-           Promise.all(createAnnotation(document, "#content h3"))
+           Promise.all(createAnnotation(document, "#content h3", "PageHeading"))
                .then(values => values.forEach(value => console.log(value)), error => console.log(error));
-           Promise.all(createAnnotation(document, "h4.panel-title")).then(values => values.forEach(value => console.log(value)), error => console.log(error));
-           Promise.all(createAnnotation(document, "div.hrf-content")).then(values => values.forEach(value => console.log(value)), error => console.log(error));
+           Promise.all(createAnnotation(document, "h4.panel-title", "FaqSectionTitle")).then(values => values.forEach(value => console.log(value)), error => console.log(error));
+           Promise.all(createAnnotation(document, "h6.hrf-title", "Question")).then(values => values.forEach(value => console.log(value)), error => console.log(error));
+           Promise.all(createAnnotation(document, "div.hrf-content", "Answer")).then(values => values.forEach(value => console.log(value)), error => console.log(error));
        } else {
            console.log("Could not fetch site.")
        }
