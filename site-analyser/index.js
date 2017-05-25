@@ -4,6 +4,7 @@ const unirest = require('unirest');
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const xpath = require("simple-xpath-position");
+const annotationFunctions = require("./site-analyser.conf.js")
 
 function createAnnotation(document, cssSelector, contentType) {
     const promises = [];
@@ -53,11 +54,12 @@ unirest.get("http://localhost")
            const dom = new JSDOM(response.body);
            const document = dom.window.document;
 
-           Promise.all(createAnnotation(document, "#content h3", "PageHeading"))
-               .then(values => values.forEach(value => console.log(value)), error => console.log(error));
-           Promise.all(createAnnotation(document, "h4.panel-title", "FaqSectionTitle")).then(values => values.forEach(value => console.log(value)), error => console.log(error));
-           Promise.all(createAnnotation(document, "h6.hrf-title", "Question")).then(values => values.forEach(value => console.log(value)), error => console.log(error));
-           Promise.all(createAnnotation(document, "div.hrf-content", "Answer")).then(values => values.forEach(value => console.log(value)), error => console.log(error));
+		   const functions = annotationFunctions.getFunctions();
+
+		   functions.forEach(annoFun => {
+			   Promise.all(annoFun(document, createAnnotation))
+			   .then(values => values.forEach(value => console.log(value)), error => console.log(error));
+		   });
        } else {
            console.log("Could not fetch site.")
        }
