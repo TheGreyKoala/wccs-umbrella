@@ -5,6 +5,9 @@ const router = express.Router();
 const unirest = require('unirest');
 const jsesc = require('jsesc');
 
+const NEO4J_USER = "neo4j";
+const NEO4J_PASSWORD = "z24yLDCYZympaqgy";
+
 router.route('/')
     .get((request, response) => {
         unirest
@@ -12,8 +15,8 @@ router.route('/')
             .headers({
                 "Accept": "application/json;charset=utf-8",
                 "Content-Type": "application/json",
-                "Authorization": "Basic bmVvNGo6bEVnT2xBcw=="
             })
+            .auth(NEO4J_USER, NEO4J_PASSWORD)
             .end((neo4jResponse) => {
                 if (neo4jResponse.ok) {
                     let annotations = neo4jResponse.body.map((node) => {
@@ -39,8 +42,8 @@ router.route('/')
                 .headers({
                     "Accept": "application/json;charset=utf-8",
                     "Content-Type": "application/json",
-                    "Authorization": "Basic bmVvNGo6bEVnT2xBcw=="
                 })
+                .auth(NEO4J_USER, NEO4J_PASSWORD)
                 .send({"annotation": JSON.stringify(annotation)})
                 .end((neo4jResponse) => {
                     if (neo4jResponse.ok) {
@@ -52,8 +55,8 @@ router.route('/')
                             .post("http://storage:7474/db/data/node/" + annotationId + "/labels")
                             .headers({
                                 "Accept": "application/json;charset=utf-8",
-                                "Authorization": "Basic bmVvNGo6bEVnT2xBcw=="
                             })
+                            .auth(NEO4J_USER, NEO4J_PASSWORD)
                             .send("\"Annotation\"")
                             .type('application/json')
                             .end((neo4jResponse2) => {
@@ -99,8 +102,8 @@ function putRequest(id, annotation, callback) {
         .put("http://storage:7474/db/data/node/" + id + "/properties/annotation")
         .headers({
             "Accept": "application/json;charset=utf-8",
-            "Authorization": "Basic bmVvNGo6bEVnT2xBcw=="
         })
+        .auth(NEO4J_USER, NEO4J_PASSWORD)
         .send(annotationAsString)
         .type("json")
         .end(callback);
@@ -115,8 +118,8 @@ router.route('/:id')
             .headers({
                 "Accept": "application/json;charset=utf-8",
                 "Content-Type": "application/json",
-                "Authorization": "Basic bmVvNGo6bEVnT2xBcw=="
             })
+            .auth(NEO4J_USER, NEO4J_PASSWORD)
             .end((neo4jResponse) => {
                 if (neo4jResponse.ok) {
                     response.json(JSON.parse(neo4jResponse.body.data.annotation));
@@ -149,8 +152,8 @@ router.route('/:id')
             .headers({
                 "Accept": "application/json;charset=utf-8",
                 "Content-Type": "application/json",
-                "Authorization": "Basic bmVvNGo6bEVnT2xBcw=="
             })
+            .auth(NEO4J_USER, NEO4J_PASSWORD)
             .end((neo4jResponse) => {
                 if (neo4jResponse.ok) {
                     response.status(204).end();

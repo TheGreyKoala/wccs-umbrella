@@ -9,6 +9,8 @@ services:
     volumes:
       - ./site-analyser/site-analyser.conf.js:/conf/site-analyser.conf.js:ro
   storage:
+    environment:
+      - NEO4J_AUTH=neo4j/z24yLDCYZympaqgy
     image: neo4j:latest
     ports:
       - "7474:7474"
