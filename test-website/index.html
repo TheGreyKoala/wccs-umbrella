@@ -653,10 +653,10 @@
 
 <script>
     jQuery(function ($) {
-        $(document.body).annotator()
-            .annotator('addPlugin', 'Store', {
-                prefix: 'http://localhost:52629'
-            });
+        let annotator = $(document.body).annotator().data('annotator');
+        annotator
+			.addPlugin('Store', { prefix: 'http://localhost:52629' })
+			.addPlugin('Permissions', { user: "editor", permissions: { 'admin': ['technicalUser'] }});
     });
 </script>
 </body>

@@ -28,7 +28,13 @@ function createAnnotation(document, cssSelector, contentType) {
                         "startOffset": 0,
                         "endOffset": nodeTextContent.length
                     }
-                ]
+                ],
+                "permissions": {
+                    "read": [],
+                    "admin": ["technicalUser"],
+                    "update": ["technicalUser"],
+                    "delete": ["technicalUser"]
+                }
             };
 
             promises.push(new Promise((resolve, reject) => {
