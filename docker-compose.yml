@@ -1,6 +1,13 @@
 version: "3"
 
 services:
+  site-analyser:
+    build: ./site-analyser
+    image: thesis/site-analyser:latest
+    ports:
+      - "44284:44284"
+    volumes:
+      - ./site-analyser/site-analyser.conf.js:/conf/site-analyser.conf.js:ro
   storage:
     image: neo4j:latest
     ports:
@@ -18,4 +25,4 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./test-website:/usr/local/apache2/htdocs/
+      - ./test-website:/usr/local/apache2/htdocs/:ro
