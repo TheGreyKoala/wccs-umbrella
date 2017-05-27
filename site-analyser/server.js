@@ -81,10 +81,12 @@ function createAnnotation(document, cssSelector, contentType) {
 }
 
 app.post("/analyse", (request, response) => {
-    let getSite = () => {
+    const job = request.body;
+
+    let getSite = (url) => {
         return new Promise((resolve, reject) => {
             unirest
-                .get("http://test-page")
+                .get(url)
                 .end((uniRestResponse) => {
                     if (uniRestResponse.ok) {
                         resolve(uniRestResponse.body);
@@ -116,7 +118,7 @@ app.post("/analyse", (request, response) => {
         });
     };
 
-    getSite()
+    getSite(job.url)
         .then(createAnnotations)
         .then(() => {
             console.log("Everything is fine!");
