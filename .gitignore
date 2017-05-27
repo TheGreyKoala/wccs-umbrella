@@ -2,3 +2,5 @@
 *.iml
 .directory
 node_modules/
+.gradle/
+build/

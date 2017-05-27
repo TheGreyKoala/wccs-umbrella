@@ -1,7 +1,10 @@
-"use strict;"
+"use strict";
 const functions = [];
 functions.push((document, createAnnotation) => createAnnotation(document, "#content h3", "PageHeading"));
+functions.push((document, createAnnotation) => createAnnotation(document, "#content h3 + h4", "PageSubHeading"));
+functions.push((document, createAnnotation) => createAnnotation(document, "#content h4 + div", "Introduction"));
 functions.push((document, createAnnotation) => createAnnotation(document, "h4.panel-title", "FaqSectionTitle"));
 functions.push((document, createAnnotation) => createAnnotation(document, "h6.hrf-title", "Question"));
 functions.push((document, createAnnotation) => createAnnotation(document, "div.hrf-content", "Answer"));
+functions.push((document, createAnnotation) => createAnnotation(document, "div.panel-group + p", "BottomText"));
 exports.getFunctions = () => functions;
