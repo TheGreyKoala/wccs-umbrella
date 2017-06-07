@@ -1,0 +1,16 @@
+{
+  "name": "annotation-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tim Gremplewski",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "unirest": "^0.5.1"
+  }
+}

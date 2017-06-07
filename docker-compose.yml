@@ -22,9 +22,8 @@ services:
     image: thesis/storage-gateway:latest
     ports:
       - "52629:52629"
-  test-page:
-    image: httpd:latest
+  annotation-proxy:
+    build: ./annotation-proxy
+    image: thesis/annotation-proxy:latest
     ports:
-      - "80:80"
-    volumes:
-      - ./test-website:/usr/local/apache2/htdocs/:ro
+      - "29136:29136"
