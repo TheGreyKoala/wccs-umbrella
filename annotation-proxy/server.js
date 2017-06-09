@@ -5,6 +5,22 @@ const unirest = require('unirest');
 
 const app = express();
 
+const headEndReplacement =
+    '<script src="http://assets.annotateit.org/annotator/v1.1.0/annotator-full.min.js"></script>' +
+    '<link rel="stylesheet" href="http://assets.annotateit.org/annotator/v1.1.0/annotator.min.css">' +
+    '</head>';
+
+const bodyEndReplacement =
+    '<script>' +
+        'jQuery(function ($) {' +
+            'let annotator = $(document.body).annotator().data("annotator");' +
+            'annotator' +
+            '    .addPlugin("Store", { prefix: "http://localhost:52629" })' +
+            '    .addPlugin("Permissions", { user: "editor", permissions: { "admin": ["technicalUser"] }});' +
+        '});' +
+    '</script>' +
+    '</body>';
+
 app.get("/", (request, response) => {
     let getPromise = new Promise((resolve, reject) => {
         unirest
@@ -19,7 +35,10 @@ app.get("/", (request, response) => {
     });
 
     getPromise.then(body => {
-        response.status(200).send(body);
+        let fixedBody = body.replace("</head>", headEndReplacement)
+            .replace("</body>", bodyEndReplacement);
+
+        response.status(200).send(fixedBody);
     }, error => {
         response.status(error.status).send(error.body);
     });
