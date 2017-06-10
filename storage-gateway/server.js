@@ -8,6 +8,7 @@ const logger = require('morgan');
 const app = express();
 const index = require('./routes/index');
 const annotations = require('./routes/annotations');
+const pages = require('./routes/pages');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -25,6 +26,7 @@ app.use((request, response, next) => {
 
 app.use('/', index);
 app.use('/annotations', annotations);
+app.use('/pages', pages);
 
 /*
  * Handle not found error
