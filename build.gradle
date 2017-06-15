@@ -1,0 +1,50 @@
+version "1.0.0-SNAPSHOT"
+
+apply plugin: "base"
+apply plugin: "distribution"
+
+repositories {
+    mavenLocal()
+}
+
+configurations {
+    modules
+}
+
+dependencies {
+    modules "de.koalaworks.wcts:wcts-storage:0.0.1-SNAPSHOT"
+}
+
+task extractModules(type: Copy) {
+    from {
+        configurations.modules.collect { tarTree(it) }
+    }
+    into "$buildDir/modules"
+}
+
+task generateDockerComposeYaml(type: Copy) {
+    from "docker-compose.template.yml"
+    into "$buildDir"
+
+    rename { file -> "docker-compose.yml" }
+    expand(configurations.modules.dependencies.collectEntries {
+        // For some reason "-" do not work in keys
+        def moduleName = it.name.replace("-", "_")
+
+        [
+            (moduleName + "_root") : "./modules/" + it.name + "-" + it.version,
+            (moduleName + "_version") : it.version
+        ]
+    })
+}
+
+distTar.dependsOn(generateDockerComposeYaml)
+distZip.dependsOn(generateDockerComposeYaml)
+
+distributions {
+    main {
+        contents {
+            from extractModules, "$buildDir/docker-compose.yml"
+        }
+    }
+}

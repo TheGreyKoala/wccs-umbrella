@@ -2,28 +2,29 @@ version: "3"
 
 services:
   site-analyser:
-    build: ./site-analyser
+    build: ../site-analyser
     image: thesis/site-analyser:latest
     ports:
       - "44284:44284"
     volumes:
-      - ./site-analyser/site-analyser.conf.js:/conf/site-analyser.conf.js:ro
+      - ../site-analyser/site-analyser.conf.js:/conf/site-analyser.conf.js:ro
   storage:
+    build: ${wcts_storage_root}
     environment:
       - NEO4J_AUTH=neo4j/z24yLDCYZympaqgy
-    image: neo4j:latest
+    image: wcts/storage:${wcts_storage_version}
     ports:
       - "7474:7474"
       - "7687:7687"
     volumes:
       - ~/neo4j_data:/data
   storage-gateway:
-    build: ./storage-gateway
+    build: ../storage-gateway
     image: thesis/storage-gateway:latest
     ports:
       - "52629:52629"
   annotation-proxy:
-    build: ./annotation-proxy
+    build: ../annotation-proxy
     image: thesis/annotation-proxy:latest
     ports:
       - "29136:29136"
