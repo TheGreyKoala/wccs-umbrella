@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 function writeAnnotation(annotation) {
     return new Promise((resolve, reject) => {
-        unirest.post("http://storage-gateway:52629/annotations")
+        unirest.post("http://storage-api:52629/annotations")
             .followRedirect(false)
             .type("json")
             .send(annotation)

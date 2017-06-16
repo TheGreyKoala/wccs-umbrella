@@ -18,9 +18,9 @@ services:
       - "7687:7687"
     volumes:
       - ~/neo4j_data:/data
-  storage-gateway:
-    build: ../storage-gateway
-    image: thesis/storage-gateway:latest
+  storage-api:
+    build: ${wcts_storage_api_root}
+    image: wcts/wcts-storage-api:${wcts_storage_api_version}
     ports:
       - "52629:52629"
   annotation-proxy:
