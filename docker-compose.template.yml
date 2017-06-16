@@ -28,3 +28,8 @@ services:
     image: thesis/annotation-proxy:latest
     ports:
       - "29136:29136"
+  web-app:
+    build: ${wcts_web_app_root}
+    image: wcts/web-app:${wcts_web_app_version}
+    ports:
+      - "80:80"
