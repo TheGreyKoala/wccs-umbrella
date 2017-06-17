@@ -1,6 +1,11 @@
 version: "3"
 
 services:
+  annotation-viewer:
+    build: ${wcts_annotation_viewer_root}
+    image: wcts/annotation-viewer:${wcts_annotation_viewer_version}
+    ports:
+      - "29136:29136"
   storage:
     build: ${wcts_storage_root}
     environment:
@@ -23,11 +28,6 @@ services:
         - "44284:44284"
       volumes:
         - ${wcts_typing_engine_root}/typing-engine.conf.js:/conf/typing-engine.conf.js:ro
-  annotation-proxy:
-    build: ../annotation-proxy
-    image: thesis/annotation-proxy:latest
-    ports:
-      - "29136:29136"
   web-app:
     build: ${wcts_web_app_root}
     image: wcts/web-app:${wcts_web_app_version}
