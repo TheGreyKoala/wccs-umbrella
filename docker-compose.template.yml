@@ -13,7 +13,7 @@ services:
       - ~/neo4j_data:/data
   storage-api:
     build: ${wcts_storage_api_root}
-    image: wcts/wcts-storage-api:${wcts_storage_api_version}
+    image: wcts/storage-api:${wcts_storage_api_version}
     ports:
       - "52629:52629"
   typing-engine:
