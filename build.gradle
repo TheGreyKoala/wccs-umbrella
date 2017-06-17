@@ -9,6 +9,7 @@ repositories {
 
 configurations {
     modules
+    other
 }
 
 dependencies {
@@ -17,6 +18,8 @@ dependencies {
     modules "de.koalaworks.wcts:wcts-storage-api:0.0.1-SNAPSHOT"
     modules "de.koalaworks.wcts:wcts-typing-engine:0.0.1-SNAPSHOT"
     modules "de.koalaworks.wcts:wcts-web-app:0.0.1-SNAPSHOT"
+
+    other "de.koalaworks.wcts:wcts-wordpress-crawler:0.0.1-SNAPSHOT"
 }
 
 task extractModules(type: Copy) {
@@ -49,6 +52,7 @@ distributions {
     main {
         contents {
             from extractModules, "$buildDir/docker-compose.yml"
+            from configurations.other
         }
     }
 }
