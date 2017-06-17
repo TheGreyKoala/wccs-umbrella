@@ -1,13 +1,6 @@
 version: "3"
 
 services:
-  site-analyser:
-    build: ../site-analyser
-    image: thesis/site-analyser:latest
-    ports:
-      - "44284:44284"
-    volumes:
-      - ../site-analyser/site-analyser.conf.js:/conf/site-analyser.conf.js:ro
   storage:
     build: ${wcts_storage_root}
     environment:
@@ -23,6 +16,13 @@ services:
     image: wcts/wcts-storage-api:${wcts_storage_api_version}
     ports:
       - "52629:52629"
+  typing-engine:
+      build: ${wcts_typing_engine_root}
+      image: wcts/typing-engine:${wcts_typing_engine_version}
+      ports:
+        - "44284:44284"
+      volumes:
+        - ${wcts_typing_engine_root}/typing-engine.conf.js:/conf/typing-engine.conf.js:ro
   annotation-proxy:
     build: ../annotation-proxy
     image: thesis/annotation-proxy:latest
