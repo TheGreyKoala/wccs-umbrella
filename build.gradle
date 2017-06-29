@@ -1,7 +1,17 @@
 version "1.0.0-SNAPSHOT"
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.avast.gradle:docker-compose-gradle-plugin:0.4.5"
+    }
+}
+
 apply plugin: "base"
 apply plugin: "distribution"
+apply plugin: "docker-compose"
 
 repositories {
     mavenLocal()
@@ -55,4 +65,14 @@ distributions {
             from configurations.other
         }
     }
+}
+
+composeUp.dependsOn(extractModules)
+composeUp.dependsOn(generateDockerComposeYaml)
+
+dockerCompose {
+	removeContainers = true
+    removeImages = "All"
+    projectName = "wcts"
+    dockerComposeWorkingDirectory = "./build"
 }
