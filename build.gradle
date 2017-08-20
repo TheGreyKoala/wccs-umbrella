@@ -71,7 +71,7 @@ composeUp.dependsOn(extractModules)
 composeUp.dependsOn(generateDockerComposeYaml)
 
 dockerCompose {
-	removeContainers = true
+    removeContainers = true
     removeImages = "All"
     projectName = "wcts"
     dockerComposeWorkingDirectory = "./build"
