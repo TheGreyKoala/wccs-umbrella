@@ -23,6 +23,7 @@ configurations {
 }
 
 dependencies {
+    modules "de.koalaworks.wcts:wccs-annotation-service:0.0.1-SNAPSHOT"
     modules "de.koalaworks.wcts:wcts-annotation-viewer:0.0.1-SNAPSHOT"
     modules "de.koalaworks.wcts:wcts-storage:0.0.1-SNAPSHOT"
     modules "de.koalaworks.wcts:wcts-storage-api:0.0.1-SNAPSHOT"

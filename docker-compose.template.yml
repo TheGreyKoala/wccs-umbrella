@@ -1,6 +1,11 @@
 version: "3"
 
 services:
+  annotation-service:
+    build: ${wccs_annotation_service_root}
+    image: wccs/annotation-service:${wccs_annotation_service_version}
+    ports:
+      - "16612:16612"
   annotation-viewer:
     build: ${wcts_annotation_viewer_root}
     image: wcts/annotation-viewer:${wcts_annotation_viewer_version}
