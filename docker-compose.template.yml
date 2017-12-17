@@ -32,7 +32,7 @@ services:
       ports:
         - "44284:44284"
       volumes:
-        - ${wcts_typing_engine_root}/resources/typing-engine.conf.js:/conf/typing-engine.conf.js:ro
+        - ${wcts_typing_engine_root}/resources/typing-engine.conf.json:/conf/typing-engine.conf.json:ro
   web-app:
     build: ${wcts_web_app_root}
     image: wcts/web-app:${wcts_web_app_version}
