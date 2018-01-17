@@ -1,3 +1,4 @@
+group = "de.koalaworks.wccs"
 version "1.0.0"
 
 buildscript {
