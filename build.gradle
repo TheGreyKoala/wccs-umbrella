@@ -32,7 +32,7 @@ dependencies {
     modules "de.koalaworks.wccs:wccs-web-app:1.0.0"
 
     other "de.koalaworks.wccs:wccs-annotator-plugin:1.0.0"
-    other "de.koalaworks.wcts:wcts-wordpress-crawler:0.0.1-SNAPSHOT"
+    other "de.koalaworks.wccs:wccs-wordpress-crawler:1.0.0"
 }
 
 task extractModules(type: Copy) {
