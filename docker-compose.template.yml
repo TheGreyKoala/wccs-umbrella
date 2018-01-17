@@ -11,16 +11,16 @@ services:
     image: wcts/annotation-viewer:${wcts_annotation_viewer_version}
     ports:
       - "29136:29136"
-  storage:
-    build: ${wcts_storage_root}
+  classification-storage:
+    build: ${wccs_classification_storage_root}
     environment:
       - NEO4J_AUTH=neo4j/z24yLDCYZympaqgy
-    image: wcts/storage:${wcts_storage_version}
+    image: wccs/classification-storage:${wccs_classification_storage_version}
     ports:
       - "7474:7474"
       - "7687:7687"
     volumes:
-      - ~/neo4j_data:/data
+      - /opt/wccs/classification-storage/data:/data
   storage-api:
     build: ${wcts_storage_api_root}
     image: wcts/storage-api:${wcts_storage_api_version}
