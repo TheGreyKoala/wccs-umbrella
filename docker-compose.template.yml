@@ -7,8 +7,8 @@ services:
     ports:
       - "16612:16612"
   annotation-viewer:
-    build: ${wcts_annotation_viewer_root}
-    image: wcts/annotation-viewer:${wcts_annotation_viewer_version}
+    build: ${wccs_annotation_viewer_root}
+    image: wccs/annotation-viewer:${wccs_annotation_viewer_version}
     ports:
       - "29136:29136"
   classification-storage:
@@ -37,7 +37,7 @@ services:
       volumes:
         - ${wcts_typing_engine_root}/resources/typing-engine.conf.json:/conf/typing-engine.conf.json:ro
   web-app:
-    build: ${wcts_web_app_root}
-    image: wcts/web-app:${wcts_web_app_version}
+    build: ${wccs_web_app_root}
+    image: wccs/web-app:${wccs_web_app_version}
     ports:
       - "80:80"
