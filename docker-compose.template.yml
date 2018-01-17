@@ -21,9 +21,12 @@ services:
       - "7687:7687"
     volumes:
       - /opt/wccs/classification-storage/data:/data
-  storage-api:
-    build: ${wcts_storage_api_root}
-    image: wcts/storage-api:${wcts_storage_api_version}
+  classification-storage-api:
+    build: ${wccs_classification_storage_api_root}
+    image: wccs/classification-storage-api:${wccs_classification_storage_api_version}
+    environment:
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: z24yLDCYZympaqgy
     ports:
       - "52629:52629"
   typing-engine:
