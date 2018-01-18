@@ -11,6 +11,13 @@ services:
     image: wccs/annotation-viewer:${wccs_annotation_viewer_version}
     ports:
       - "29136:29136"
+  classification-service:
+        build: ${wccs_classification_service_root}
+        image: wccs/classification-service:${wccs_classification_service_version}
+        ports:
+          - "44284:44284"
+        volumes:
+          - /opt/wccs/classification-service/classification-model.json:/conf/classification-model.json:ro
   classification-storage:
     build: ${wccs_classification_storage_root}
     environment:
@@ -29,13 +36,6 @@ services:
       NEO4J_PASSWORD: z24yLDCYZympaqgy
     ports:
       - "52629:52629"
-  typing-engine:
-      build: ${wcts_typing_engine_root}
-      image: wcts/typing-engine:${wcts_typing_engine_version}
-      ports:
-        - "44284:44284"
-      volumes:
-        - ${wcts_typing_engine_root}/resources/typing-engine.conf.json:/conf/typing-engine.conf.json:ro
   web-app:
     build: ${wccs_web_app_root}
     image: wccs/web-app:${wccs_web_app_version}

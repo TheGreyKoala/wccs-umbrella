@@ -26,9 +26,9 @@ configurations {
 dependencies {
     modules "de.koalaworks.wccs:wccs-annotation-service:1.0.0"
     modules "de.koalaworks.wccs:wccs-annotation-viewer:1.0.0"
+    modules "de.koalaworks.wccs:wccs-classification-service:1.0.0"
     modules "de.koalaworks.wccs:wccs-classification-storage:1.0.0"
     modules "de.koalaworks.wccs:wccs-classification-storage-api:1.0.0"
-    modules "de.koalaworks.wcts:wcts-typing-engine:0.0.1-SNAPSHOT"
     modules "de.koalaworks.wccs:wccs-web-app:1.0.0"
 
     other "de.koalaworks.wccs:wccs-annotator-plugin:1.0.0"
