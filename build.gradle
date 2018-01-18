@@ -2,6 +2,7 @@ group = "de.koalaworks.wccs"
 version "1.0.0"
 
 buildscript {
+    ext.wcmlVersion = "1.0.0"
     repositories {
         jcenter()
     }
@@ -20,6 +21,7 @@ repositories {
 
 configurations {
     modules
+    wcml
     other
 }
 
@@ -30,6 +32,10 @@ dependencies {
     modules "de.koalaworks.wccs:wccs-classification-storage:1.0.0"
     modules "de.koalaworks.wccs:wccs-classification-storage-api:1.0.0"
     modules "de.koalaworks.wccs:wccs-web-app:1.0.0"
+    wcml "de.koalaworks.wccs.wcml:de.koalaworks.wccs.wcml:$wcmlVersion"
+    wcml "de.koalaworks.wccs.wcml:de.koalaworks.wccs.wcml.feature:$wcmlVersion"
+    wcml "de.koalaworks.wccs.wcml:de.koalaworks.wccs.wcml.ide:$wcmlVersion"
+    wcml "de.koalaworks.wccs.wcml:de.koalaworks.wccs.wcml.ui:$wcmlVersion"
 
     other "de.koalaworks.wccs:wccs-annotator-plugin:1.0.0"
     other "de.koalaworks.wccs:wccs-wordpress-crawler:1.0.0"
@@ -40,6 +46,13 @@ task extractModules(type: Copy) {
         configurations.modules.collect { tarTree(it) }
     }
     into "$buildDir/modules"
+}
+
+task extractOther(type: Copy) {
+    from {
+        configurations.other.collect { tarTree(it) }
+    }
+    into "$buildDir/other"
 }
 
 task generateDockerComposeYaml(type: Copy) {
@@ -63,9 +76,12 @@ distZip.dependsOn(generateDockerComposeYaml)
 
 distributions {
     main {
+        baseName = "WebContentClassificationSystem"
         contents {
-            from extractModules, "$buildDir/docker-compose.yml"
-            from configurations.other
+            from extractModules, extractOther, "$buildDir/docker-compose.yml"
+            into ("wccs-web-content-modeling-language-$wcmlVersion") {
+                from configurations.wcml
+            }
         }
     }
 }
