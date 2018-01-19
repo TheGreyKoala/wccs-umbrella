@@ -32,10 +32,7 @@ dependencies {
     modules "de.koalaworks.wccs:wccs-classification-storage:1.0.0"
     modules "de.koalaworks.wccs:wccs-classification-storage-api:1.0.0"
     modules "de.koalaworks.wccs:wccs-web-app:1.0.0"
-    wcml "de.koalaworks.wccs.wcml:de.koalaworks.wccs.wcml:$wcmlVersion"
-    wcml "de.koalaworks.wccs.wcml:de.koalaworks.wccs.wcml.feature:$wcmlVersion"
-    wcml "de.koalaworks.wccs.wcml:de.koalaworks.wccs.wcml.ide:$wcmlVersion"
-    wcml "de.koalaworks.wccs.wcml:de.koalaworks.wccs.wcml.ui:$wcmlVersion"
+    wcml "de.koalaworks.wccs.wcml:de.koalaworks.wccs.wcml.distribution:$wcmlVersion@zip"
 
     other "de.koalaworks.wccs:wccs-annotator-plugin:1.0.0"
     other "de.koalaworks.wccs:wccs-wordpress-crawler:1.0.0"
