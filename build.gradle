@@ -73,7 +73,7 @@ distZip.dependsOn(generateDockerComposeYaml)
 
 distributions {
     main {
-        baseName = "WebContentClassificationSystem"
+        baseName = "WebpageContentClassificationSystem"
         contents {
             from extractModules, extractOther, "$buildDir/docker-compose.yml"
             into ("wccs-web-content-modeling-language-$wcmlVersion") {
