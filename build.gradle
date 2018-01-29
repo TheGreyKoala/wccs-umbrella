@@ -54,7 +54,7 @@ task extractOther(type: Copy) {
 
 task generateDockerComposeYaml(type: Copy) {
     from "docker-compose.template.yml"
-    into "$buildDir"
+    into "$buildDir/modules"
 
     rename { file -> "docker-compose.yml" }
     expand(configurations.modules.dependencies.collectEntries {
@@ -62,7 +62,7 @@ task generateDockerComposeYaml(type: Copy) {
         def moduleName = it.name.replace("-", "_")
 
         [
-            (moduleName + "_root") : "./modules/" + it.name + "-" + it.version,
+            (moduleName + "_root") : "./" + it.name + "-" + it.version,
             (moduleName + "_version") : it.version
         ]
     })
