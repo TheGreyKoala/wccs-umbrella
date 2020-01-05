@@ -1,3 +1,5 @@
-= My Master Thesis Project
+= WCCS Umbrella
 
-The project for my master thesis will be developed here.
+This umbrella project of the Web Content Classification System creates a `docker-compose.yml` file that can be used to run the system.
+The `Dockerfile` of each service, their assets and the `docker-compose.yml` file will be packaged in a zip file.
+See my https://github.com/TheGreyKoala/masters-thesis[master's thesis] for more information about the Web Content Classification System.
